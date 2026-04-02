@@ -50,7 +50,7 @@ The first two models (MolmoWeb-8B and MolmoWeb-4B) are Huggingface/transformers-
 
 ## Installation
 
-Requires Python 3.10+. We use [uv](https://docs.astral.sh/uv/) for dependency management.
+Requires Python >=3.10,<3.13. We use [uv](https://docs.astral.sh/uv/) for dependency management.
 
 ```bash
 # Install uv if you don't have it
@@ -59,7 +59,7 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 # Clone and install
 git clone git@github.com:allenai/molmoweb.git
 cd molmoweb
-uv venv
+uv venv --python ">=3.10,<3.13"
 uv sync
 
 # Install Playwright browsers (needed for local browser control)
