@@ -14,7 +14,7 @@ SAVE_FOLDER=results/eval_${CHECKPOINT_PATH}
 
 DATA_DIR=${WEBOLMO_DATA_DIR} MOLMO_DATA_DIR=${WEBOLMO_DATA_DIR} \
 WEBOLMO_DATA_DIR=${WEBOLMO_DATA_DIR} \
-torchrun -m \
+uv run torchrun -m \
   --nproc-per-node ${NUM_GPUS} \
   launch_scripts.eval ${CHECKPOINT_PATH} ${MIXTURE} \
   --save_dir=${SAVE_FOLDER} \

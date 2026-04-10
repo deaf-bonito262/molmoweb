@@ -1588,51 +1588,24 @@ class MolmoWebHumanSkills(MolmoWebHumanTrajs):
             if row["sample_id"] not in self.BLACKLIST_IDS:
                 yield row, "default"
 
+
 if __name__ == "__main__":
-    # download all datasets once 
-    # MolmoWebSyntheticGround.download()
-    # MolmoWebSyntheticQA.download()
-    # MolmoWebSyntheticTrajs.download()
-    # MolmoWebHumanTrajs.download()
-    # MolmoWebSyntheticSkills.download()
-    # MolmoWebHumanSkills.download()
     from olmo.data.get_dataset import get_dataset_by_name
-    
-    new_dataset_names = [
-        # "molmoweb_synthetic_ground__template",
-        # "molmoweb_synthetic_ground__gpt",
-        # # "molmoweb_screenshot_qa",
+    dataset_names = [
+        "molmoweb_synthetic_ground__template",
+        "molmoweb_synthetic_ground__gpt",
+        "molmoweb_screenshot_qa",
         "molmoweb_synthetic_trajs",
         "molmoweb_human_trajs",
         "molmoweb_synthetic_skills",
-        # "molmoweb_human_skills",
-        # "molmoweb_synthetic_trajs__from_template",
-        # "molmoweb_synthetic_trajs__task_seeded_wv",
-        # "molmoweb_synthetic_trajs__task_seeded_om2w",
-        # "molmoweb_synthetic_trajs__multi_agent",
-        # "molmoweb_synthetic_trajs__node_traversal",
-        # "pixmo_points_single_web",
-        # "screenspot",
-        # "screenspot_v2"
+        "molmoweb_human_skills",
+        "pixmo_points_single_web",
+        "screenspot",
+        "screenspot_v2"
     ]
     split = "train"
-    import time
-    # for old, new in zip(old_dataset_names, new_dataset_names):
-    # track the loading time of each dataset
-    for new in new_dataset_names:
-        # print(f"Checking dataset: {old} → {new}")
-        start_time = time.time()
-        new_ds = get_dataset_by_name(new, split=split)
-        end_time = time.time()
-        print(f"Loaded {new} in {end_time - start_time:.2f} seconds")
-        # old_ds = get_dataset_by_name(old, split=split)
-        # print(f"  Lengths: {len(old_ds)} vs {len(new_ds)}")
-        # old_ex = old_ds[0]
-        new_ex = new_ds[0]
-        # print(f"  Old example keys: {list(old_ex.keys())}")
-        print(f"  New example keys: {list(new_ex.keys())}")
-        # print(f"  Old example: {old_ex}")
-        print(f"  New example: {new_ex}")
-    
-    
-            
+    for ds in dataset_names:
+        ds = get_dataset_by_name(new, split=split)
+        print(f"Loaded {ds} with {len(ds)} examples.")
+        ex = ds[0]
+        print(f"New example: {ex}")

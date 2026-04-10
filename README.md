@@ -379,6 +379,9 @@ uv run python olmo/data/download_datasets.py
 | HumanTrajs | `allenai/MolmoWeb-HumanTrajs` | Human-annotated trajectories |
 | SyntheticSkills | `allenai/MolmoWeb-SyntheticSkills` | Synthetic atomic skill demonstrations |
 | HumanSkills | `allenai/MolmoWeb-HumanSkills` | Human atomic skill demonstrations |
+| PixMoPoints | `allenai/pixmo-points` | Point annotations for visual grounding |
+| ScreenSpot | `rootsautomation/ScreenSpot` | UI grounding benchmark |
+| ScreenSpotV2 | `likaixin/ScreenSpot-v2-variants` | UI grounding benchmark v2 |
 
 ### Visualizing Data
 
@@ -395,19 +398,6 @@ uv run python dataset_visualize.py molmoweb_synthetic_trajs ./viz --split train 
 ```
 
 This saves `./viz/molmoweb_synthetic_trajs.html` with rendered examples (images, tokenized text, and ground-truth annotations).
-
-Key arguments:
-
-| Argument | Default | Description |
-|---|---|---|
-| `task` | *(required)* | Dataset/task name (e.g. `screenspot`, `webclick`, `groundui_1k`) |
-| `output_dir` | *(required)* | Directory to write the HTML file |
-| `--split` | `train` | Dataset split (`train` or `test`) |
-| `--num_examples` | `100` | Number of examples to render |
-| `--shuffle` | `false` | Shuffle examples before selecting |
-| `--show_patches` | `false` | Visualize patch features interleaved with text |
-| `--show_crops` | `false` | Show image crops used by the preprocessor |
-| `--eval` | `false` | Use eval-mode preprocessing (excludes responses) |
 
 ### Downloading Pretrained Checkpoints
 
@@ -448,7 +438,7 @@ bash run_train.sh
 To launch a debug run directly:
 
 ```bash
-torchrun -m --nproc-per-node 1 \
+uv run torchrun -m --nproc-per-node 1 \
   launch_scripts.train debug debug \
   --save_folder=dbg \
   --device_batch_size 1 \
